@@ -13,6 +13,7 @@
     "cpu_info": "./index.js"
   },
   "dependencies": {
+    "@f0c1s/color-green": "0.0.1",
     "@f0c1s/color-red": "0.0.1",
     "@f0c1s/color-yellow": "0.0.1",
     "commander": "^4.0.1"
