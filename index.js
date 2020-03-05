@@ -12,6 +12,6 @@ function run (style, duration, times = Infinity) {
 }
 
 program
-  .arguments('<style> <duration> <times>')
+  .arguments('<style> <duration>')
   .action(run)
   .parse(process.argv)
