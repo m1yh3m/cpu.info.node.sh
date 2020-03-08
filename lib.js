@@ -7,12 +7,16 @@ const yellow = require('@f0c1s/color-yellow')
 const areSame = (cpus, key) => cpus.map(c => c[key]).every(x => x === cpus[0][key])
 const areAllModelSame = cpus => areSame(cpus, 'model') // model contains speed info. Weird!
 
-function currentMemoryUsage() {
+function currentMemoryUsage () {
   const total = totalmem()
-  const free = freemem(), freepc = Math.floor(free / total * 100)
-  const used = total - free, usedpc = Math.ceil(used / total * 100)
+  const free = freemem(); const freepc = Math.floor(free / total * 100)
+  const used = total - free; const usedpc = Math.ceil(used / total * 100)
   return {
-    free, freepc, total, used, usedpc,
+    free,
+    freepc,
+    total,
+    used,
+    usedpc,
     ks: { free: free / 1024, used: used / 1024, total: total / 1024 },
     ms: { free: free / 1024 / 1024, used: used / 1024 / 1024, total: total / 1024 / 1024 },
     gs: { free: free / 1024 / 1024 / 1024, used: used / 1024 / 1024 / 1024, total: total / 1024 / 1024 / 1024 },
@@ -20,21 +24,16 @@ function currentMemoryUsage() {
   }
 }
 
-function cpusStream(duration, times, cb) {
-  let i = 0
-  const id = setInterval(() => {
+function cpusStream (duration, cb) {
+  setInterval(() => {
     console.clear()
-    i++ // increment the timer
     cb(cpus())
-    if (i >= times) {
-      clearInterval(id) // clear interval timer when we have done this times times
-    }
   }, duration)
 }
 
-function clean(duration, times) {
-  let prevCPU = []
-  cpusStream(duration, times, function cpuData(data) {
+function clean (duration) {
+  const prevCPU = []
+  cpusStream(duration, function cpuData (data) {
     const shouldRemoveModel = areAllModelSame(data)
     const memory = currentMemoryUsage()
     console.log(shouldRemoveModel ? `Model: ${data[0].model}` : '')
@@ -44,7 +43,7 @@ function clean(duration, times) {
     data.forEach(({ times: cputimes }, i) => {
       let { user, sys, idle } = cputimes
       if (prevCPU[i]) {
-        let { user: puser, sys: psys, idle: pidle } = prevCPU[i]
+        const { user: puser, sys: psys, idle: pidle } = prevCPU[i]
         user = user - puser
         sys = sys - psys
         idle = idle - pidle
@@ -57,9 +56,9 @@ function clean(duration, times) {
   })
 }
 
-function bar(duration, times) {
-  let prevCPU = []
-  cpusStream(duration, times, function cpuData(data) {
+function bar (duration) {
+  const prevCPU = []
+  cpusStream(duration, function cpuData (data) {
     const shouldRemoveModel = areAllModelSame(data)
     const memory = currentMemoryUsage()
     console.log(shouldRemoveModel ? `Model: ${data[0].model}` : '')
@@ -70,7 +69,7 @@ function bar(duration, times) {
     data.forEach(({ times: cputimes }, i) => {
       let { user, sys, idle } = cputimes
       if (prevCPU[i]) {
-        let { user: puser, sys: psys, idle: pidle } = prevCPU[i]
+        const { user: puser, sys: psys, idle: pidle } = prevCPU[i]
         user = user - puser
         sys = sys - psys
         idle = idle - pidle
@@ -86,8 +85,8 @@ function bar(duration, times) {
   })
 }
 
-function raw(duration, times) {
-  cpusStream(duration, times, function cpuData(data) {
+function raw (duration) {
+  cpusStream(duration, function cpuData (data) {
     console.log(data)
   })
 }
