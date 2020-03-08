@@ -3,12 +3,11 @@
 const program = require('commander')
 const lib = require('./lib')
 
-function run (style, duration, times = Infinity) {
-  console.info(`style: ${style}; duration: ${duration} milliseconds; times: ${times}`)
+function run (style, duration) {
   /* lib returns {raw(), clean(), bar()}
    * style has two possible values: raw|clean or it calls undefined()
    */
-  return lib[style](duration, times)
+  return lib[style](duration)
 }
 
 program
