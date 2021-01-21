@@ -1,21 +1,30 @@
 {
   "name": "@m1yh3m/cpu.info.node.sh",
-  "version": "3.0.0",
+  "version": "2021.1.1",
   "description": "Get constant feed of your CPU in terminal",
-  "main": "index.js",
+  "main": "src/cpu_info.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "cpu info",
+    "cpu usage",
+    "cpu",
+    "cli",
+    "cpu info cli"
+  ],
+  "author": "Anubhav <iamanubhavsaini@gmail.com>",
+  "license": "MIT",
   "bin": {
-    "cpu_info": "./index.js"
+    "cpu_info": "src/cpu_info.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/m1yh3m/cpu.info.node.sh.git"
   },
   "dependencies": {
     "@f0c1s/color-green": "0.0.1",
     "@f0c1s/color-red": "0.0.1",
-    "@f0c1s/color-yellow": "0.0.1",
-    "commander": "^4.0.1"
+    "@f0c1s/color-yellow": "0.0.1"
   }
 }

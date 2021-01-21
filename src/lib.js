@@ -1,4 +1,4 @@
-const { cpus, freemem, totalmem } = require('os')
+const {cpus, freemem, totalmem} = require('os')
 
 const red = require('@f0c1s/color-red')
 const green = require('@f0c1s/color-green')
@@ -13,9 +13,9 @@ function currentMemoryUsage() {
   const used = total - free, usedpc = Math.ceil(used / total * 100)
   return {
     free, freepc, total, used, usedpc,
-    ks: { free: free / 1024, used: used / 1024, total: total / 1024 },
-    ms: { free: free / 1024 / 1024, used: used / 1024 / 1024, total: total / 1024 / 1024 },
-    gs: { free: free / 1024 / 1024 / 1024, used: used / 1024 / 1024 / 1024, total: total / 1024 / 1024 / 1024 },
+    ks: {free: free / 1024, used: used / 1024, total: total / 1024},
+    ms: {free: free / 1024 / 1024, used: used / 1024 / 1024, total: total / 1024 / 1024},
+    gs: {free: free / 1024 / 1024 / 1024, used: used / 1024 / 1024 / 1024, total: total / 1024 / 1024 / 1024},
     bar: `${red(Array(usedpc).fill('-').join(''))}${green(Array(freepc).fill('-').join(''))}`
   }
 }
@@ -38,13 +38,13 @@ function clean(duration, times) {
     const shouldRemoveModel = areAllModelSame(data)
     const memory = currentMemoryUsage()
     console.log(shouldRemoveModel ? `Model: ${data[0].model}` : '')
-    console.log(`MEM: used: ${red(memory.gs.used)}GB, free: ${green(memory.gs.free)}GB, total: ${memory.gs.total}GB`)
+    console.log(`MEM: used: ${red(memory.gs.used.toFixed(3))}GB, free: ${green(memory.gs.free.toFixed(3))}GB, total: ${memory.gs.total.toFixed(3)}GB`)
     let out = 'cpus\n'
 
-    data.forEach(({ times: cputimes }, i) => {
-      let { user, sys, idle } = cputimes
+    data.forEach(({times: cputimes}, i) => {
+      let {user, sys, idle} = cputimes
       if (prevCPU[i]) {
-        let { user: puser, sys: psys, idle: pidle } = prevCPU[i]
+        let {user: puser, sys: psys, idle: pidle} = prevCPU[i]
         user = user - puser
         sys = sys - psys
         idle = idle - pidle
@@ -63,14 +63,14 @@ function bar(duration, times) {
     const shouldRemoveModel = areAllModelSame(data)
     const memory = currentMemoryUsage()
     console.log(shouldRemoveModel ? `Model: ${data[0].model}` : '')
-    console.log(`MEM: used: ${red(memory.gs.used)}GB, free: ${green(memory.gs.free)}GB, total: ${memory.gs.total}GB`)
+    console.log(`MEM: used: ${red(memory.gs.used.toFixed(3))}GB, free: ${green(memory.gs.free.toFixed(3))}GB, total: ${memory.gs.total.toFixed(3)}GB`)
     console.log(`MEM\t${memory.bar}`)
 
     let out = 'cpus\n'
-    data.forEach(({ times: cputimes }, i) => {
-      let { user, sys, idle } = cputimes
+    data.forEach(({times: cputimes}, i) => {
+      let {user, sys, idle} = cputimes
       if (prevCPU[i]) {
-        let { user: puser, sys: psys, idle: pidle } = prevCPU[i]
+        let {user: puser, sys: psys, idle: pidle} = prevCPU[i]
         user = user - puser
         sys = sys - psys
         idle = idle - pidle
