@@ -4,13 +4,15 @@ Get constant feed of your CPU in terminal
 
 ## usage
 
+Latest version: `2022.08.17`.
+
 ```bash
 
 npx @m1yh3m/cpu.info.node.sh clean 1000 100
 
 # OR
 
-npm i -g @m1yh3m/cpu.info.node.sh
+npm i -g @m1yh3m/cpu.info.node.sh@2022.08.17
 
 // cpu_info <style=clean|raw|bar> <duration=N> <times=N>
 cpu_info clean 1000 100

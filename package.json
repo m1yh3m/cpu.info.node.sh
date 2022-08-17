@@ -1,6 +1,6 @@
 {
   "name": "@m1yh3m/cpu.info.node.sh",
-  "version": "2023.0.0",
+  "version": "2022.08.17",
   "description": "Get constant feed of your CPU in terminal",
   "main": "src/cpu_info.js",
   "scripts": {
